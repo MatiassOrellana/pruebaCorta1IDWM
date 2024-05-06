@@ -93,9 +93,13 @@ async Task<IResult> updateOnlyStockChair(int id, [FromBody] int stock, DataConte
 
 }
 
-async Task<IResult> deleteChair(HttpContext context)
+async Task<IResult> deleteChair(int id, DataContext db)
 {
-    throw new NotImplementedException();
+    Chair? foundChair = await GetChairById(id, db);
+    if(foundChair is null) return TypedResults.NotFound("no se encontró la silla con el id");
+    db.Chairs.Remove(foundChair);
+    await db.SaveChangesAsync();
+    return TypedResults.NoContent();
 }
 
 
