@@ -66,9 +66,21 @@ async Task<IResult> buyChair([FromBody] BuyChairDTO buyChairDto, DataContext db)
 }
 
 
-async Task updateChair(HttpContext context)
+async Task<IResult> updateChair(int id, [FromBody] UpdateChairDTO updateChairDTO, DataContext db)
 {
-    throw new NotImplementedException();
+    Chair? foundChair = await GetChairById(id, db);
+    if(foundChair is null) return TypedResults.NotFound("no se encontró la silla con el id");
+    foundChair.Nombre = updateChairDTO.Nombre;
+    foundChair.Tipo = updateChairDTO.Tipo;
+    foundChair.Material = updateChairDTO.Material;
+    foundChair.Color = updateChairDTO.Color;
+    foundChair.Altura = updateChairDTO.Altura;
+    foundChair.Anchura = updateChairDTO.Anchura;
+    foundChair.Profundidad = updateChairDTO.Profundidad;
+    foundChair.Precio = updateChairDTO.Precio;
+    await db.SaveChangesAsync();
+    return TypedResults.NoContent();
+
 }
 
 async Task updateOnlyStockChair(HttpContext context)
