@@ -83,12 +83,17 @@ async Task<IResult> updateChair(int id, [FromBody] UpdateChairDTO updateChairDTO
 
 }
 
-async Task updateOnlyStockChair(HttpContext context)
+async Task<IResult> updateOnlyStockChair(int id, [FromBody] int stock, DataContext db)
 {
-    throw new NotImplementedException();
+    Chair? foundChair = await GetChairById(id, db);
+    if(foundChair is null) return TypedResults.NotFound("no se encontró la silla con el id");
+    foundChair.Stock = foundChair.Stock + stock;
+    await db.SaveChangesAsync();
+    return TypedResults.Ok(foundChair);
+
 }
 
-async Task deleteChair(HttpContext context)
+async Task<IResult> deleteChair(HttpContext context)
 {
     throw new NotImplementedException();
 }
