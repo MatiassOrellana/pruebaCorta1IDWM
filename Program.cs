@@ -44,9 +44,13 @@ async Task<IResult> GetChairByName(string nombre, DataContext db)
     return TypedResults.Ok(foundChair);
 }
 
-async Task<IResult> addChair(Chair chair)
+async Task<IResult> addChair([FromBody] Chair chair, DataContext db)
 {
-    return TypedResults.Ok();
+    Chair? foundChair = await db.Chairs.Where(u => u.Nombre == chair.Nombre).FirstOrDefaultAsync();
+    if(foundChair is not null) return TypedResults.Ok("Esa silla ya está en el sistema");
+    await db.Chairs.AddAsync(chair);
+    await db.SaveChangesAsync();
+    return TypedResults.Created("Silla Creada: " + chair);
 }
 
 async Task buyChair(HttpContext context)
