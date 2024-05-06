@@ -31,7 +31,7 @@ async Task<IResult> GetChairs(DataContext db)
     return TypedResults.Ok(chairlist);
 }
 
-async Task<Chair> GetChairById(int id, DataContext db)
+async Task<Chair?> GetChairById(int id, DataContext db)
 {
     Chair? foundChair = await db.Chairs.FindAsync(id);
     return foundChair;
@@ -50,13 +50,21 @@ async Task<IResult> addChair([FromBody] Chair chair, DataContext db)
     if(foundChair is not null) return TypedResults.Ok("Esa silla ya está en el sistema");
     await db.Chairs.AddAsync(chair);
     await db.SaveChangesAsync();
-    return TypedResults.Created("Silla Creada: " + chair);
+    return TypedResults.Created("Silla Creada");
 }
 
-async Task buyChair(HttpContext context)
+async Task<IResult> buyChair([FromBody] BuyChairDTO buyChairDto, DataContext db)
 {
-    throw new NotImplementedException();
+    Chair? foundChair = await GetChairById(buyChairDto.Id, db);
+    if(foundChair is null) return TypedResults.BadRequest("no se encontró la silla con el id");
+    if(buyChairDto.Stock > foundChair.Stock) return TypedResults.BadRequest("El stock seleccionado es mayor que el que hay");
+    int totalcosto = foundChair.Precio * buyChairDto.Stock;
+    if(buyChairDto.TotalPagado < totalcosto) return TypedResults.BadRequest("Usted debe pagar el precio que corresponde que son: " + totalcosto);
+    foundChair.Stock = foundChair.Stock - buyChairDto.Stock;
+    await db.SaveChangesAsync();
+    return TypedResults.Ok("Compra realizada");
 }
+
 
 async Task updateChair(HttpContext context)
 {
