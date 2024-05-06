@@ -18,13 +18,14 @@ var chairs = app.MapGroup("api/chair");
 chairs.MapGet("/", GetChairs);
 chairs.MapGet("/{nombre}", GetChairByName);
 chairs.MapPost("/", addChair);
-chairs.MapPost("/chair/purchase", buyChair);
+chairs.MapPost("/purchase", buyChair);
 chairs.MapPut("/{id}", updateChair);
 chairs.MapPut("/{id}/stock", updateOnlyStockChair);
 chairs.MapDelete("/{id}", deleteChair);
 app.Run();
 
 //TODO: ENDPOINTS SOLICITADOS
+//endpointed
 async Task<IResult> GetChairs(DataContext db)
 {
     List<Chair> chairlist = await db.Chairs.ToListAsync();
@@ -36,14 +37,14 @@ async Task<Chair?> GetChairById(int id, DataContext db)
     Chair? foundChair = await db.Chairs.FindAsync(id);
     return foundChair;
 }
-
+//endpointed
 async Task<IResult> GetChairByName(string nombre, DataContext db)
 {
     Chair? foundChair = await db.Chairs.Where(u => u.Nombre == nombre).FirstOrDefaultAsync();
     if(foundChair is null) return TypedResults.NotFound("no se encontró la silla con ese nombre");
     return TypedResults.Ok(foundChair);
 }
-
+//endpointed
 async Task<IResult> addChair([FromBody] Chair chair, DataContext db)
 {
     Chair? foundChair = await db.Chairs.Where(u => u.Nombre == chair.Nombre).FirstOrDefaultAsync();
@@ -83,11 +84,11 @@ async Task<IResult> updateChair(int id, [FromBody] UpdateChairDTO updateChairDTO
 
 }
 
-async Task<IResult> updateOnlyStockChair(int id, [FromBody] int stock, DataContext db)
+async Task<IResult> updateOnlyStockChair(int id, [FromBody] UpdateStockDTO updateStockDTO, DataContext db)
 {
     Chair? foundChair = await GetChairById(id, db);
     if(foundChair is null) return TypedResults.NotFound("no se encontró la silla con el id");
-    foundChair.Stock = foundChair.Stock + stock;
+    foundChair.Stock = foundChair.Stock + updateStockDTO.Stock;
     await db.SaveChangesAsync();
     return TypedResults.Ok(foundChair);
 

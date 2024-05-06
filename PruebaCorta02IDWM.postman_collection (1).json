@@ -1,0 +1,271 @@
+{
+	"info": {
+		"_postman_id": "77413b0a-03b7-4a89-8c34-55b3392782a6",
+		"name": "PruebaCorta02IDWM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25748462"
+	},
+	"item": [
+		{
+			"name": "GetChairs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api}}/",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetChairByName",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api}}/Hola",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"Hola"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddChair",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"Nombre\": \"Hola\",\r\n        \"Tipo\" : \"Madera\",\r\n        \"Material\" : \"Madera\",\r\n        \"Color\" : \"Cafe\", \r\n        \"Altura\" : 2,  \r\n        \"Anchura\" : 2, \r\n        \"Profundidad\" : 2,  \r\n        \"Precio\" : 2, \r\n        \"Stock\"  : 20\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api}}/",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddChair2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"Nombre\": \"Chao\",\r\n        \"Tipo\" : \"Madera\",\r\n        \"Material\" : \"Madera\",\r\n        \"Color\" : \"Cafe\", \r\n        \"Altura\" : 2,  \r\n        \"Anchura\" : 2, \r\n        \"Profundidad\" : 2,  \r\n        \"Precio\" : 3, \r\n        \"Stock\"  : 30\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api}}/",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddChair3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"Nombre\": \"sofa\",\r\n        \"Tipo\" : \"Mueble\",\r\n        \"Material\" : \"Algodón\",\r\n        \"Color\" : \"Blanco\", \r\n        \"Altura\" : 2,  \r\n        \"Anchura\" : 5, \r\n        \"Profundidad\" : 2,  \r\n        \"Precio\" : 4, \r\n        \"Stock\"  : 40\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api}}/",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "buyChair",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"Id\": 1,\r\n        \"Stock\": 10,\r\n        \"TotalPagado\": 20\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api}}/purchase",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"purchase"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateChair",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"Nombre\": \"Hola\",\r\n        \"Tipo\": \"Mueble\",\r\n        \"Material\": \"Madera\",\r\n        \"Color\": \"Cafe\",\r\n        \"Altura\": 2,  \r\n        \"Anchura\": 2, \r\n        \"Profundidad\": 2,  \r\n        \"Precio\": 20\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api}}/1",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateStock",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Stock\": 20\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api}}/1/stock",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"1",
+						"stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteChair",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{api}}/3",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api",
+			"value": "http://localhost:5275/api/chair",
+			"type": "string"
+		}
+	]
+}
